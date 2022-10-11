@@ -9,7 +9,6 @@
         {
             Rang = rang;
             Matrix = GenerateMatrix(rang);
-
         }
         private int[,] GenerateMatrix(int rang)
         {

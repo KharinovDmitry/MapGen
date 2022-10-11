@@ -1,4 +1,6 @@
+using System;
 using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace MapGen
 {
@@ -10,16 +12,30 @@ namespace MapGen
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            GenerateMap();
-        }
-
-        private void GenerateMap()
-        {
             int rang = 10; // 2 ^ rang = size of map
             int k = 30; // smooth koef
             MapMatrix map = new MapMatrix(rang, k);
-            string path = @".\test.png";
+            AddRiver(map);
+            DrawBitmap(map);
+        }
+
+        private void AddRiver(MapMatrix map)
+        {
+            MapMatrix mapRiver = new MapMatrix(map.Rang, 20);
+            for (int i = 0; i < mapRiver.Size; i++)
+            {
+                for (int j = 0; j < mapRiver.Size; j++)
+                {
+                    if (mapRiver.Matrix[i, j] > 0.38 && mapRiver.Matrix[i, j] < 0.4)
+                        map.Matrix[i, j] = 0.4;
+                }
+            }
+        }
+
+        private void DrawBitmap(MapMatrix map)
+        {
             Bitmap bmp = GetBitmap(map);
+            string path = @".\test.png";
             bmp.Save(path);
             PictureBox pic = new PictureBox();
             pic.SizeMode = PictureBoxSizeMode.AutoSize;
