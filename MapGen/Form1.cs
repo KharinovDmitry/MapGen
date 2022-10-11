@@ -15,10 +15,10 @@ namespace MapGen
 
         private void GenerateMap()
         {
-            int rang = 10; // 2 ^ rang = размер карты
-            int k = 30; // Коэффицент сглаживания
+            int rang = 10; // 2 ^ rang = size of map
+            int k = 30; // smooth koef
             MapMatrix map = new MapMatrix(rang, k);
-            string path = @"C:\\Users\terro\OneDrive\Рабочий стол\VS\test.png";
+            string path = @".\test.png";
             Bitmap bmp = GetBitmap(map);
             bmp.Save(path);
             PictureBox pic = new PictureBox();

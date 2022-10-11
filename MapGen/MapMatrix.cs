@@ -19,7 +19,18 @@
         private double[,] GenerateMatrix()
         {
             double[,] res = new double[Size, Size];
-            Calculate(res);
+            for (int i = 0; i < Size; i++)
+            {
+                for (int j = 0; j < Size; j++)
+                {
+                    double sum = 0;
+                    foreach (var el in perlins)
+                    {
+                        sum += el.Matrix[i, j];
+                    }
+                    res[i, j] = sum / Rang;
+                }
+            }
             return res;
         }
 
@@ -33,22 +44,6 @@
                     {
                         res[i, j] = MiddleOf(Matrix[i, j], Matrix[i - 1, j], Matrix[i + 1, j], Matrix[i, j - 1], Matrix[i, j + 1]);
                     }
-                }
-            }
-        }
-
-        private void Calculate(double[,] res)
-        {
-            for (int i = 0; i < Size; i++)
-            {
-                for (int j = 0; j < Size; j++)
-                {
-                    double sum = 0;
-                    foreach (var el in perlins)
-                    {
-                        sum += el.Matrix[i, j];
-                    }
-                    res[i, j] = sum / Rang;
                 }
             }
         }
